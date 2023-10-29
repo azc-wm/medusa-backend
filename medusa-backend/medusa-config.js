@@ -45,14 +45,17 @@ const plugins = [
   {
     resolve: "@medusajs/admin",
     /** @type {import('@medusajs/admin').PluginOptions} */
-    // options: {
-    //   autoRebuild: true,
-    // },
+    options: {
+      autoRebuild: true,
+      develop: {
+        open: process.env.OPEN_BROWSER !== "false",
+      },
+    },
   },
 ];
 
 const modules = {
-  eventBus: {
+ eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
       redisUrl: REDIS_URL
