@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "clean": "cross-env ./node_modules/.bin/rimraf dist",
-    "build": "cross-env npm run clean && npm run build:server --omit=dev && npm run build:admin --omit=dev",
+    "build": "NODE_OPTIONS=--max-old-space-size=4096 cross-env npm run clean && npm run build:server --omit=dev && npm run build:admin --omit=dev",
     "build:server": "tsc -p tsconfig.server.json",
     "build:admin": "cross-env medusa-admin build",
     "watch": "cross-env tsc --watch",
