@@ -36,26 +36,9 @@ const REDIS_URL =
   "redis://default:OkNFFHAgMpckj4GclI2LNDaAapoHCmaJ@monorail.proxy.rlwy.net:32683";
 
 const plugins = [
-  `medusa-fulfillment-manual`,
-  `medusa-payment-manual`,
-  {
-    resolve: `@medusajs/file-local`,
-    options: {
-      upload_dir: "uploads",
-    },
-  },
   {
     resolve: "@medusajs/admin",
     /** @type {import('@medusajs/admin').PluginOptions} */
-    options: {
-      autoRebuild: true,
-      serve: true,
-      backend: "https://back.uneurounmovil.com",
-      path: "/admin",
-      // develop: {
-      // open: process.env.OPEN_BROWSER !== "false",
-      // },
-    },
   },
 ];
 
