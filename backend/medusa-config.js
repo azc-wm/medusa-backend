@@ -23,7 +23,7 @@ try {
 
 // CORS when consuming Medusa from admin
 const ADMIN_CORS =
-  process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001,https://localhost:7000,https://localhost:7001";
+  process.env.ADMIN_CORS || "http://localhost:7000,http://localhost:7001";
 
 // CORS to avoid issues when consuming Medusa from a client
 const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
@@ -31,7 +31,9 @@ const STORE_CORS = process.env.STORE_CORS || "http://localhost:8000";
 const DATABASE_URL =
   process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
 
-const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
+const REDIS_URL =
+  process.env.REDIS_URL ||
+  "redis://default:OkNFFHAgMpckj4GclI2LNDaAapoHCmaJ@monorail.proxy.rlwy.net:32683";
 
 const plugins = [
   `medusa-fulfillment-manual`,
@@ -46,11 +48,13 @@ const plugins = [
     resolve: "@medusajs/admin",
     /** @type {import('@medusajs/admin').PluginOptions} */
     options: {
-      path: "/admin",
       autoRebuild: true,
-      develop: {
-        open: process.env.OPEN_BROWSER !== "false",
-      },
+      serve: true,
+      backend: "https://back.uneurounmovil.com",
+      path: "/admin",
+      // develop: {
+      // open: process.env.OPEN_BROWSER !== "false",
+      // },
     },
   },
 ];
@@ -59,14 +63,14 @@ const modules = {
   eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
-      redisUrl: REDIS_URL
-    }
+      redisUrl: REDIS_URL,
+    },
   },
   cacheService: {
     resolve: "@medusajs/cache-redis",
     options: {
-      redisUrl: REDIS_URL
-    }
+      redisUrl: REDIS_URL,
+    },
   },
 };
 
@@ -78,7 +82,7 @@ const projectConfig = {
   database_url: DATABASE_URL,
   admin_cors: ADMIN_CORS,
   // Uncomment the following lines to enable REDIS
-  redis_url: REDIS_URL
+  redis_url: REDIS_URL,
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
